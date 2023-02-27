@@ -8,24 +8,21 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('accounts', function (Blueprint $table) {
-            $table->id();
-            $table->Integer('balance')->default(0);
-            $table->timestamps();
+            $table->id('id');
+            $table->foreignId('id_people')->references('id')->on('people');            
+            $table->double('balance')->default(0);
+            $table->timestamps();            
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('accounts');
     }

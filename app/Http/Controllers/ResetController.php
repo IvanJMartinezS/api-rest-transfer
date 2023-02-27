@@ -9,7 +9,6 @@ class ResetController extends Controller
 {
     public function reset()
     {
-        // Reset state before starting tests
         
         Artisan::call('migrate:fresh');
         
