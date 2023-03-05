@@ -23,7 +23,7 @@ GET /balance?account_id=1
 ## Get balance for non-existing account
 
 ```
-GET /balance?account_id=1234
+GET /balance?account_id=1
 
 404 0
 ```
@@ -32,9 +32,9 @@ GET /balance?account_id=1234
 
 ```
 POST /event 
-JSON {"type":"deposit", "destination":1, "amount":10}
+JSON {"type":"deposit", "destination":1, "amount":20}
 
-201 {"destination": {"id":"100", "balance":10}}
+201 {"destination": {"id":1, "balance":20}}
 ```
 
 ## Deposit into non-existing account
@@ -53,7 +53,7 @@ JSON {"type":"deposit", "destination":100, "amount":10}
 POST /event 
 JSON {"type":"withdraw", "origin":1, "amount":10}
 
-201 {"origin": {"id":"100", "balance":15}}
+201 {"origin": {"id":1, "balance":10}}
 ```
 
 ## Withdraw from non-existing account
@@ -69,9 +69,9 @@ JSON {"type":"withdraw", "origin":100, "amount":10}
 
 ```
 POST /event 
-JSON {"type":"withdraw", "origin":100, "amount":10}
+JSON {"type":"withdraw", "origin":1, "amount":20}
 
-404 {"Error": {"Response": "Saldo Insuficiente"}, "origin": {"id": 2, "balance": 0}}
+404 {"Error": {"Response": "Saldo Insuficiente"}, "origin": {"id": 1, "balance": 10}}
 ```
 
 ## Transfer from existing account
@@ -80,7 +80,7 @@ JSON {"type":"withdraw", "origin":100, "amount":10}
 POST /event 
 JSON {"type":"transfer", "origin":1, "amount":10, "destination":2}
 
-201 {"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
+201 {"origin": {"id":1, "balance":0}, "destination": {"id":2, "balance":10}}
 ```
 
 ## Transfer from non-existing account
